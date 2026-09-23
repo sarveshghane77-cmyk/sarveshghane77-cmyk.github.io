@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sarveshghane.sarveshai",
+      "sha256_cert_fingerprints": [
+        "F8:48:E5:CB:84:18:21:4F:2B:CF:1B:1F:3F:E9:02:47:7B:B8:14:5E:90:30:55:00:10:42:70:3E:74:57:F6:24"
+      ]
+    }
+  }
+]
