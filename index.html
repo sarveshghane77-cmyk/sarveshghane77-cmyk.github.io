@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#111827">
+<meta name="description" content="SARVESH AI assistant created by Sarvesh Ghane">
 <title>SARVESH AI</title>
 
 <style>
@@ -11,211 +12,306 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
   font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7fb;
 }
 
 body{
-  background:#f7f7f8;
-  height:100vh;
-  overflow:hidden;
+  display:flex;
+  justify-content:center;
 }
 
 .app{
+  width:100%;
+  max-width:700px;
   height:100vh;
   display:flex;
   flex-direction:column;
+  background:#fff;
+  overflow:hidden;
 }
 
+/* HEADER */
 .header{
-  height:64px;
+  height:70px;
+  flex-shrink:0;
   background:#111827;
   color:white;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 16px;
-  flex-shrink:0;
+  padding:0 18px;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logoIcon{
-  width:38px;
-  height:38px;
+  width:42px;
+  height:42px;
   border-radius:50%;
-  background:white;
-  color:#111827;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:bold;
+  font-size:18px;
 }
 
-.logoText{
-  font-size:20px;
+.brandText{
+  display:flex;
+  flex-direction:column;
+}
+
+.brandName{
+  font-size:19px;
   font-weight:700;
 }
 
 .creator{
   font-size:11px;
   opacity:.75;
+  margin-top:2px;
 }
 
+.status{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:11px;
+  opacity:.8;
+}
+
+.statusDot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#22c55e;
+}
+
+/* CHAT */
 .chat{
   flex:1;
   overflow-y:auto;
-  padding:20px 14px 110px;
+  padding:18px 14px 12px;
+  background:#f7f8fc;
+  scroll-behavior:smooth;
 }
 
-.message{
+.welcome{
+  text-align:center;
+  padding:35px 20px;
+  color:#6b7280;
+}
+
+.welcomeIcon{
+  width:64px;
+  height:64px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:white;
+  margin:0 auto 15px;
   display:flex;
-  margin-bottom:18px;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  font-weight:bold;
 }
 
-.message.user{
+.welcome h2{
+  color:#111827;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.welcome p{
+  font-size:14px;
+  line-height:1.5;
+}
+
+.messageRow{
+  display:flex;
+  margin:9px 0;
+}
+
+.messageRow.user{
   justify-content:flex-end;
 }
 
-.bubble{
-  max-width:85%;
-  padding:13px 15px;
-  border-radius:18px;
-  line-height:1.45;
+.message{
+  max-width:82%;
+  padding:11px 14px;
+  border-radius:17px;
   font-size:15px;
+  line-height:1.5;
   white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
-.ai .bubble{
+.message.ai{
   background:white;
-  color:#222;
+  color:#1f2937;
   border:1px solid #e5e7eb;
   border-bottom-left-radius:5px;
+  box-shadow:0 1px 3px rgba(0,0,0,.05);
 }
 
-.user .bubble{
+.message.user{
   background:#111827;
   color:white;
   border-bottom-right-radius:5px;
 }
 
-.welcome{
-  text-align:center;
-  padding:70px 20px 30px;
+.time{
+  font-size:9px;
+  opacity:.5;
+  margin-top:4px;
+  text-align:right;
 }
 
-.welcomeIcon{
-  width:70px;
-  height:70px;
-  margin:auto;
-  border-radius:50%;
-  background:#111827;
-  color:white;
-  display:flex;
+/* TYPING */
+.typing{
+  display:none;
   align-items:center;
-  justify-content:center;
-  font-size:28px;
-  font-weight:bold;
+  gap:5px;
+  width:max-content;
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:17px;
+  padding:12px 15px;
+  margin:8px 0;
 }
 
-.welcome h1{
-  margin-top:18px;
-  font-size:27px;
+.typing.show{
+  display:flex;
 }
 
-.welcome p{
-  margin-top:8px;
-  color:#777;
+.typing span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#777;
+  animation:bounce 1.2s infinite;
 }
 
+.typing span:nth-child(2){
+  animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+  animation-delay:.3s;
+}
+
+@keyframes bounce{
+  0%,60%,100%{transform:translateY(0)}
+  30%{transform:translateY(-5px)}
+}
+
+/* INPUT */
 .inputArea{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(247,247,248,.96);
-  padding:10px 12px 14px;
-  border-top:1px solid #ddd;
+  flex-shrink:0;
+  padding:10px 11px 12px;
+  background:white;
+  border-top:1px solid #e5e7eb;
 }
 
 .inputBox{
-  max-width:800px;
-  margin:auto;
   display:flex;
-  align-items:center;
+  align-items:flex-end;
   gap:7px;
-  background:white;
-  border:1px solid #d5d5d5;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
   border-radius:25px;
   padding:6px 7px 6px 14px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
-#input{
+textarea{
   flex:1;
-  border:none;
-  outline:none;
+  resize:none;
+  border:0;
+  outline:0;
+  background:transparent;
+  font-family:inherit;
   font-size:15px;
-  min-width:0;
-}
-
-button{
-  border:none;
-  cursor:pointer;
+  line-height:22px;
+  min-height:22px;
+  max-height:110px;
+  padding:5px 0;
 }
 
 .iconBtn{
   width:40px;
   height:40px;
+  flex-shrink:0;
+  border:0;
   border-radius:50%;
-  background:#f1f1f1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-size:19px;
+  cursor:pointer;
 }
 
-.sendBtn{
-  width:42px;
-  height:42px;
-  border-radius:50%;
+.mic{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.mic.listening{
+  background:#ef4444;
+  color:white;
+}
+
+.send{
   background:#111827;
   color:white;
-  font-size:18px;
 }
 
-.listening{
-  background:#dc2626 !important;
-  color:white;
+.iconBtn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
-.footer{
+.footerText{
   text-align:center;
-  font-size:10px;
-  color:#999;
-  margin-top:5px;
+  font-size:9px;
+  color:#9ca3af;
+  margin-top:6px;
 }
 
-.typing{
-  display:flex;
-  gap:4px;
-  padding:4px;
-}
+/* MOBILE */
+@media(max-width:480px){
+  .header{
+    height:64px;
+    padding:0 13px;
+  }
 
-.typing span{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#999;
-  animation:bounce 1s infinite;
-}
+  .logo{
+    width:39px;
+    height:39px;
+  }
 
-.typing span:nth-child(2){animation-delay:.15s}
-.typing span:nth-child(3){animation-delay:.3s}
+  .brandName{
+    font-size:17px;
+  }
 
-@keyframes bounce{
-  0%,80%,100%{transform:scale(.7)}
-  40%{transform:scale(1)}
+  .message{
+    max-width:88%;
+  }
+
+  .chat{
+    padding-left:10px;
+    padding-right:10px;
+  }
 }
 </style>
 </head>
@@ -224,188 +320,328 @@ button{
 
 <div class="app">
 
-<header class="header">
-  <div class="logo">
-    <div class="logoIcon">S</div>
-    <div>
-      <div class="logoText">SARVESH AI</div>
-      <div class="creator">Created by Sarvesh Ghane</div>
+  <header class="header">
+    <div class="brand">
+      <div class="logo">S</div>
+
+      <div class="brandText">
+        <div class="brandName">SARVESH AI</div>
+        <div class="creator">Created by Sarvesh Ghane</div>
+      </div>
     </div>
+
+    <div class="status">
+      <span class="statusDot"></span>
+      Online
+    </div>
+  </header>
+
+  <main class="chat" id="chat">
+
+    <div class="welcome" id="welcome">
+      <div class="welcomeIcon">S</div>
+      <h2>Hello! I'm SARVESH AI</h2>
+      <p>
+        Ask me anything. Type your message or use the microphone.
+      </p>
+    </div>
+
+    <div class="typing" id="typing">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </main>
+
+  <div class="inputArea">
+
+    <div class="inputBox">
+
+      <textarea
+        id="messageInput"
+        rows="1"
+        placeholder="Message SARVESH AI..."
+        autocomplete="off"
+      ></textarea>
+
+      <button
+        class="iconBtn mic"
+        id="micBtn"
+        title="Voice input"
+        type="button"
+      >🎤</button>
+
+      <button
+        class="iconBtn send"
+        id="sendBtn"
+        title="Send"
+        type="button"
+      >➤</button>
+
+    </div>
+
+    <div class="footerText">
+      SARVESH AI • Created by Sarvesh Ghane
+    </div>
+
   </div>
-</header>
-
-<main class="chat" id="chat">
-
-  <div class="welcome" id="welcome">
-    <div class="welcomeIcon">S</div>
-    <h1>How can I help you?</h1>
-    <p>I'm SARVESH AI, created by Sarvesh Ghane.</p>
-  </div>
-
-</main>
-
-<div class="inputArea">
-
-  <div class="inputBox">
-
-    <button class="iconBtn"
-            id="micBtn"
-            onclick="toggleVoice()"
-            title="Voice input">
-      🎤
-    </button>
-
-    <input
-      id="input"
-      type="text"
-      placeholder="Message SARVESH AI..."
-      autocomplete="off"
-    >
-
-    <button class="sendBtn"
-            onclick="sendMessage()">
-      ➤
-    </button>
-
-  </div>
-
-  <div class="footer">
-    SARVESH AI • Created by Sarvesh Ghane
-  </div>
-
-</div>
 
 </div>
 
 <script>
 
-const input = document.getElementById("input");
+/* =========================================================
+   SARVESH AI
+   Website → Cloudflare Worker → OpenRouter
+   ========================================================= */
+
+const WORKER_URL =
+  "https://sarvesh-ai-backend.sarveshghane77.workers.dev";
+
 const chat = document.getElementById("chat");
+const input = document.getElementById("messageInput");
+const sendBtn = document.getElementById("sendBtn");
 const micBtn = document.getElementById("micBtn");
+const typing = document.getElementById("typing");
 const welcome = document.getElementById("welcome");
 
-let recognition = null;
-let listening = false;
-
-input.addEventListener("keydown", function(e){
-  if(e.key === "Enter"){
-    e.preventDefault();
-    sendMessage();
-  }
-});
+let conversation = [];
+let isSending = false;
 
 
-function addMessage(text,type){
+/* =========================================================
+   TIME
+   ========================================================= */
+
+function getTime(){
+
+  return new Date().toLocaleTimeString([],{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+   ========================================================= */
+
+function addMessage(role,text){
 
   if(welcome){
     welcome.style.display="none";
   }
 
-  const message=document.createElement("div");
-  message.className="message "+type;
+  const row = document.createElement("div");
 
-  const bubble=document.createElement("div");
-  bubble.className="bubble";
-  bubble.textContent=text;
+  row.className =
+    "messageRow " +
+    (role === "user" ? "user" : "ai");
 
-  message.appendChild(bubble);
-  chat.appendChild(message);
+  const bubble = document.createElement("div");
+
+  bubble.className =
+    "message " +
+    (role === "user" ? "user" : "ai");
+
+  bubble.textContent = text;
+
+  const time = document.createElement("div");
+
+  time.className="time";
+  time.textContent=getTime();
+
+  bubble.appendChild(time);
+  row.appendChild(bubble);
+
+  chat.insertBefore(row,typing);
 
   chat.scrollTop=chat.scrollHeight;
 
-  return message;
 }
 
+
+/* =========================================================
+   TYPING
+   ========================================================= */
 
 function showTyping(){
 
-  const message=document.createElement("div");
-  message.className="message ai";
-  message.id="typingMessage";
-
-  const bubble=document.createElement("div");
-  bubble.className="bubble";
-
-  bubble.innerHTML=
-    '<div class="typing">'+
-    '<span></span><span></span><span></span>'+
-    '</div>';
-
-  message.appendChild(bubble);
-  chat.appendChild(message);
+  typing.classList.add("show");
 
   chat.scrollTop=chat.scrollHeight;
+
 }
 
 
-function removeTyping(){
+function hideTyping(){
 
-  const typing=document.getElementById("typingMessage");
+  typing.classList.remove("show");
 
-  if(typing){
-    typing.remove();
-  }
 }
 
+
+/* =========================================================
+   SEND MESSAGE
+   ========================================================= */
 
 async function sendMessage(){
 
   const text=input.value.trim();
 
-  if(!text) return;
+  if(!text || isSending){
+    return;
+  }
 
-  addMessage(text,"user");
+  isSending=true;
+  sendBtn.disabled=true;
+
+  addMessage("user",text);
+
+  conversation.push({
+    role:"user",
+    content:text
+  });
 
   input.value="";
+  input.style.height="auto";
 
   showTyping();
 
-  /*
-    TEMPORARY RESPONSE SYSTEM
+  try{
 
-    Your real AI backend will be connected here.
-    I have deliberately not put a fake API key into this website.
-  */
+    const history = conversation.slice(-12);
 
-  setTimeout(function(){
+    const response = await fetch(WORKER_URL,{
 
-    removeTyping();
+      method:"POST",
 
-    let reply="I'm SARVESH AI, created by Sarvesh Ghane. ";
+      headers:{
+        "Content-Type":"application/json"
+      },
 
-    const lower=text.toLowerCase();
+      body:JSON.stringify({
+        message:text,
+        history:history
+      })
 
-    if(lower.includes("creator") ||
-       lower.includes("created you") ||
-       lower.includes("developed you")){
+    });
 
-      reply += "My creator and developer is Sarvesh Ghane.";
 
-    }else if(lower.includes("your name")){
+    let data;
 
-      reply += "My name is SARVESH AI.";
+    try{
+      data=await response.json();
+    }catch{
+      throw new Error("The server returned an invalid response.");
+    }
 
-    }else if(lower.includes("who are you")){
 
-      reply += "I am SARVESH AI, an AI assistant created by Sarvesh Ghane.";
+    if(!response.ok){
 
-    }else{
-
-      reply += "Your AI connection is ready to be connected. Once we connect your AI backend, I will be able to answer your questions normally.";
+      throw new Error(
+        data.error ||
+        "AI server error. Please try again."
+      );
 
     }
 
-    addMessage(reply,"ai");
 
-    speak(reply);
+    if(!data.reply){
 
-  },700);
+      throw new Error(
+        "SARVESH AI did not return a reply."
+      );
+
+    }
+
+
+    conversation.push({
+      role:"assistant",
+      content:data.reply
+    });
+
+    hideTyping();
+
+    addMessage("assistant",data.reply);
+
+    speak(data.reply);
+
+  }catch(error){
+
+    hideTyping();
+
+    console.error(error);
+
+    let message =
+      "Sorry, I couldn't connect to SARVESH AI right now.";
+
+    if(
+      error.message &&
+      error.message.length < 200
+    ){
+      message += "\n\n" + error.message;
+    }
+
+    addMessage("assistant",message);
+
+  }finally{
+
+    isSending=false;
+    sendBtn.disabled=false;
+    input.focus();
+
+  }
+
 }
 
 
-/* =========================
-   VOICE OUTPUT
-========================= */
+/* =========================================================
+   SEND BUTTON
+   ========================================================= */
+
+sendBtn.addEventListener(
+  "click",
+  sendMessage
+);
+
+
+/* =========================================================
+   ENTER TO SEND
+   ========================================================= */
+
+input.addEventListener("keydown",function(e){
+
+  if(e.key==="Enter" && !e.shiftKey){
+
+    e.preventDefault();
+
+    sendMessage();
+
+  }
+
+});
+
+
+/* =========================================================
+   AUTO RESIZE TEXTAREA
+   ========================================================= */
+
+input.addEventListener("input",function(){
+
+  this.style.height="auto";
+
+  this.style.height =
+    Math.min(this.scrollHeight,110) + "px";
+
+});
+
+
+/* =========================================================
+   SPEECH OUTPUT
+   ========================================================= */
 
 function speak(text){
 
@@ -413,98 +649,199 @@ function speak(text){
     return;
   }
 
-  speechSynthesis.cancel();
+  try{
 
-  const utterance=new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.cancel();
 
-  utterance.lang="en-IN";
-  utterance.rate=.95;
-  utterance.pitch=1;
+    const utterance =
+      new SpeechSynthesisUtterance(text);
 
-  speechSynthesis.speak(utterance);
+    utterance.rate=1;
+    utterance.pitch=1;
+    utterance.volume=1;
+
+    window.speechSynthesis.speak(utterance);
+
+  }catch(error){
+
+    console.log("Speech output unavailable");
+
+  }
+
 }
 
 
-/* =========================
+/* =========================================================
    VOICE INPUT
-========================= */
+   ========================================================= */
 
-function setupRecognition(){
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
 
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+let recognition=null;
+let listening=false;
 
-  if(!SpeechRecognition){
 
-    alert("Voice input is not supported by this browser.");
+if(SpeechRecognition){
 
-    return null;
-  }
+  recognition=new SpeechRecognition();
 
-  const r=new SpeechRecognition();
+  recognition.lang="en-IN";
 
-  r.lang="en-IN";
-  r.continuous=false;
-  r.interimResults=false;
+  recognition.continuous=false;
 
-  r.onstart=function(){
+  recognition.interimResults=false;
+
+
+  recognition.onstart=function(){
 
     listening=true;
 
     micBtn.classList.add("listening");
-    micBtn.textContent="⏹️";
+
+    micBtn.textContent="⏹";
+
   };
 
-  r.onresult=function(event){
 
-    const transcript =
+  recognition.onresult=function(event){
+
+    const result =
       event.results[0][0].transcript;
 
-    input.value=transcript;
+    input.value=result;
 
-    sendMessage();
+    input.dispatchEvent(
+      new Event("input")
+    );
+
   };
 
-  r.onerror=function(){
+
+  recognition.onerror=function(event){
+
+    console.log(
+      "Speech recognition error:",
+      event.error
+    );
+
+  };
+
+
+  recognition.onend=function(){
 
     listening=false;
 
     micBtn.classList.remove("listening");
+
     micBtn.textContent="🎤";
+
   };
 
-  r.onend=function(){
 
-    listening=false;
+  micBtn.addEventListener("click",function(){
 
-    micBtn.classList.remove("listening");
-    micBtn.textContent="🎤";
-  };
+    if(listening){
 
-  return r;
+      recognition.stop();
+
+      return;
+
+    }
+
+    try{
+
+      recognition.start();
+
+    }catch(error){
+
+      console.log(error);
+
+    }
+
+  });
+
+}else{
+
+  micBtn.addEventListener("click",function(){
+
+    alert(
+      "Voice input is not supported by this browser."
+    );
+
+  });
+
 }
 
 
-function toggleVoice(){
+/* =========================================================
+   LOAD SAVED CHAT
+   ========================================================= */
 
-  if(!recognition){
+try{
 
-    recognition=setupRecognition();
+  const saved =
+    localStorage.getItem("sarvesh_ai_chat");
 
-    if(!recognition) return;
+  if(saved){
+
+    conversation=JSON.parse(saved);
+
+    conversation.forEach(item=>{
+
+      if(
+        item.role==="user" ||
+        item.role==="assistant"
+      ){
+
+        addMessage(
+          item.role,
+          item.content
+        );
+
+      }
+
+    });
+
   }
 
-  if(listening){
+}catch(error){
 
-    recognition.stop();
+  console.log("No saved chat");
 
-  }else{
-
-    recognition.start();
-
-  }
 }
+
+
+/* =========================================================
+   SAVE CHAT
+   ========================================================= */
+
+setInterval(function(){
+
+  try{
+
+    localStorage.setItem(
+      "sarvesh_ai_chat",
+      JSON.stringify(
+        conversation.slice(-30)
+      )
+    );
+
+  }catch(error){
+
+    console.log("Could not save chat");
+
+  }
+
+},2000);
+
+
+/* =========================================================
+   FOCUS INPUT
+   ========================================================= */
+
+input.focus();
 
 </script>
 
