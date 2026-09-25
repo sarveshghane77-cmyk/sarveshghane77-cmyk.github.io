@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#111827">
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="description" content="SARVESH AI assistant created by Sarvesh Ghane">
-<title>SARVESH AI</title>
-
-<style>
+<title>SARVESH AI</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -154,7 +151,6 @@ body{
   border-radius:17px;
   font-size:15px;
   line-height:1.5;
-  white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
 
@@ -177,6 +173,56 @@ body{
   opacity:.5;
   margin-top:4px;
   text-align:right;
+}
+
+/* IMAGE MESSAGE */
+.generatedImageBox{
+  margin-top:10px;
+  width:100%;
+}
+
+.generatedImage{
+  display:block;
+  width:100%;
+  max-width:100%;
+  max-height:600px;
+  object-fit:contain;
+  border-radius:14px;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+}
+
+.imageActions{
+  display:flex;
+  gap:8px;
+  margin-top:9px;
+}
+
+.downloadImageBtn{
+  border:0;
+  background:#111827;
+  color:white;
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.downloadImageBtn:active{
+  transform:scale(.97);
+}
+
+.imageError{
+  padding:10px;
+  background:#fef2f2;
+  color:#b91c1c;
+  border:1px solid #fecaca;
+  border-radius:10px;
+  font-size:13px;
 }
 
 /* TYPING */
@@ -291,6 +337,7 @@ textarea{
 
 /* MOBILE */
 @media(max-width:480px){
+
   .header{
     height:64px;
     padding:0 13px;
@@ -313,84 +360,68 @@ textarea{
     padding-left:10px;
     padding-right:10px;
   }
+
+  .generatedImage{
+    max-height:500px;
+  }
 }
-</style>
-</head>
+</style></head><body><div class="app"><header class="header">  <div class="brand"><div class="logo">S</div>
 
-<body>
+<div class="brandText">
 
-<div class="app">
+  <div class="brandName">
+    SARVESH AI
+  </div>
 
-  <header class="header">
-    <div class="brand">
-      <div class="logo">S</div>
-
-      <div class="brandText">
-        <div class="brandName">SARVESH AI</div>
-        <div class="creator">Created by Sarvesh Ghane</div>
-      </div>
-    </div>
-
-    <div class="status">
-      <span class="statusDot"></span>
-      Online
-    </div>
-  </header>
-
-  <main class="chat" id="chat">
-
-    <div class="welcome" id="welcome">
-      <div class="welcomeIcon">S</div>
-      <h2>Hello! I'm SARVESH AI</h2>
-      <p>
-        Ask me anything. Type your message or use the microphone.
-      </p>
-    </div>
-
-    <div class="typing" id="typing">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-  </main>
-
-  <div class="inputArea">
-
-    <div class="inputBox">
-
-      <textarea
-        id="messageInput"
-        rows="1"
-        placeholder="Message SARVESH AI..."
-        autocomplete="off"
-      ></textarea>
-
-      <button
-        class="iconBtn mic"
-        id="micBtn"
-        title="Voice input"
-        type="button"
-      >🎤</button>
-
-      <button
-        class="iconBtn send"
-        id="sendBtn"
-        title="Send"
-        type="button"
-      >➤</button>
-
-    </div>
-
-    <div class="footerText">
-      SARVESH AI • Created by Sarvesh Ghane
-    </div>
-
+  <div class="creator">
+    Created by Sarvesh Ghane
   </div>
 
 </div>
 
-<script>
+  </div>  <div class="status"><span class="statusDot"></span>
+Online
+
+  </div></header><main class="chat" id="chat">  <div class="welcome" id="welcome"><div class="welcomeIcon">
+  S
+</div>
+
+<h2>
+  Hello! I'm SARVESH AI
+</h2>
+
+<p>
+  Ask me anything. Type your message or use the microphone.
+</p>
+
+  </div>  <div class="typing" id="typing"><span></span>
+<span></span>
+<span></span>
+
+  </div></main><div class="inputArea">  <div class="inputBox"><textarea
+  id="messageInput"
+  rows="1"
+  placeholder="Message SARVESH AI..."
+  autocomplete="off"
+></textarea>
+
+<button
+  class="iconBtn mic"
+  id="micBtn"
+  title="Voice input"
+  type="button"
+>🎤</button>
+
+<button
+  class="iconBtn send"
+  id="sendBtn"
+  title="Send"
+  type="button"
+>➤</button>
+
+  </div>  <div class="footerText">
+    SARVESH AI • Created by Sarvesh Ghane
+  </div></div></div><script>
 
 /* =========================================================
    SARVESH AI
@@ -400,15 +431,29 @@ textarea{
 const WORKER_URL =
   "https://sarvesh-ai-backend.sarveshghane77.workers.dev";
 
-const chat = document.getElementById("chat");
-const input = document.getElementById("messageInput");
-const sendBtn = document.getElementById("sendBtn");
-const micBtn = document.getElementById("micBtn");
-const typing = document.getElementById("typing");
-const welcome = document.getElementById("welcome");
 
-let conversation = [];
-let isSending = false;
+const chat =
+  document.getElementById("chat");
+
+const input =
+  document.getElementById("messageInput");
+
+const sendBtn =
+  document.getElementById("sendBtn");
+
+const micBtn =
+  document.getElementById("micBtn");
+
+const typing =
+  document.getElementById("typing");
+
+const welcome =
+  document.getElementById("welcome");
+
+
+let conversation=[];
+
+let isSending=false;
 
 
 /* =========================================================
@@ -418,9 +463,616 @@ let isSending = false;
 function getTime(){
 
   return new Date().toLocaleTimeString([],{
+
     hour:"2-digit",
     minute:"2-digit"
+
   });
+
+}
+
+
+/* =========================================================
+   CHECK WHETHER SOMETHING IS AN IMAGE URL
+   ========================================================= */
+
+function isImageUrl(value){
+
+  if(typeof value!=="string"){
+    return false;
+  }
+
+  const v=value.trim();
+
+  if(
+    v.startsWith("data:image/") ||
+    v.startsWith("blob:") ||
+    v.startsWith("https://") ||
+    v.startsWith("http://")
+  ){
+
+    return true;
+
+  }
+
+  return false;
+
+}
+
+
+/* =========================================================
+   FIND IMAGE IN SERVER RESPONSE
+   ========================================================= */
+
+function findImage(data){
+
+  if(!data){
+    return null;
+  }
+
+
+  /* Direct image fields */
+
+  const directFields=[
+
+    data.image,
+    data.image_url,
+    data.imageUrl,
+    data.url,
+    data.generated_image,
+    data.generatedImage
+
+  ];
+
+
+  for(const item of directFields){
+
+    if(isImageUrl(item)){
+      return item;
+    }
+
+  }
+
+
+  /* Array of images */
+
+  if(Array.isArray(data.images)){
+
+    for(const item of data.images){
+
+      if(typeof item==="string" && isImageUrl(item)){
+        return item;
+      }
+
+
+      if(item && typeof item==="object"){
+
+        const possible=[
+
+          item.url,
+          item.image,
+          item.image_url,
+          item.imageUrl
+
+        ];
+
+
+        for(const value of possible){
+
+          if(isImageUrl(value)){
+            return value;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+  /* OpenRouter-style image data */
+
+  if(data.data && Array.isArray(data.data)){
+
+    for(const item of data.data){
+
+      if(!item){
+        continue;
+      }
+
+
+      if(typeof item==="string" && isImageUrl(item)){
+        return item;
+      }
+
+
+      if(typeof item==="object"){
+
+        const possible=[
+
+          item.url,
+          item.image,
+          item.b64_json,
+          item.image_url
+
+        ];
+
+
+        for(const value of possible){
+
+          if(typeof value==="string"){
+
+            if(
+              value.startsWith("data:image/")
+            ){
+
+              return value;
+
+            }
+
+
+            /* Raw base64 image */
+
+            if(
+              value.length>200 &&
+              /^[A-Za-z0-9+/=]+$/.test(value)
+            ){
+
+              return "data:image/png;base64,"+value;
+
+            }
+
+
+            if(isImageUrl(value)){
+              return value;
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+  /* OpenAI/OpenRouter message content */
+
+  if(
+    data.choices &&
+    Array.isArray(data.choices)
+  ){
+
+    for(const choice of data.choices){
+
+      if(!choice){
+        continue;
+      }
+
+
+      const content =
+        choice.message &&
+        choice.message.content;
+
+
+      const found =
+        findImageInsideContent(content);
+
+      if(found){
+        return found;
+      }
+
+    }
+
+  }
+
+
+  /* Search nested response */
+
+  if(data.response){
+
+    const found=findImage(data.response);
+
+    if(found){
+      return found;
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================================================
+   FIND IMAGE INSIDE CONTENT
+   ========================================================= */
+
+function findImageInsideContent(content){
+
+  if(!content){
+    return null;
+  }
+
+
+  if(typeof content==="string"){
+
+    /* Markdown image */
+
+    const markdown=
+      content.match(
+        /![^]*\]([^)]+)/
+      );
+
+
+    if(markdown && isImageUrl(markdown[1])){
+      return markdown[1];
+    }
+
+
+    /* Data URL */
+
+    const dataUrl=
+      content.match(
+        /data:image\/[a-zA-Z0-9.+-]+;base64,[A-Za-z0-9+/=]+/
+      );
+
+
+    if(dataUrl){
+      return dataUrl[0];
+    }
+
+
+    /* Plain image URL */
+
+    const urls=
+      content.match(
+        /https?:\/\/[^\s"'<>]+/g
+      );
+
+
+    if(urls){
+
+      for(const url of urls){
+
+        if(
+          /\.(png|jpg|jpeg|webp|gif)(\?[^\s"'<>]*)?$/i
+            .test(url)
+        ){
+
+          return url;
+
+        }
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  if(Array.isArray(content)){
+
+    for(const part of content){
+
+      const found=
+        findImageInsideContent(part);
+
+      if(found){
+        return found;
+      }
+
+    }
+
+  }
+
+
+  if(typeof content==="object"){
+
+    const direct=[
+
+      content.url,
+      content.image_url,
+      content.image,
+      content.b64_json
+
+    ];
+
+
+    for(const value of direct){
+
+      if(typeof value==="string"){
+
+        if(value.startsWith("data:image/")){
+          return value;
+        }
+
+
+        if(
+          value.length>200 &&
+          /^[A-Za-z0-9+/=]+$/.test(value)
+        ){
+
+          return "data:image/png;base64,"+value;
+
+        }
+
+
+        if(isImageUrl(value)){
+          return value;
+        }
+
+      }
+
+    }
+
+
+    for(const key of Object.keys(content)){
+
+      const found=
+        findImageInsideContent(content[key]);
+
+      if(found){
+        return found;
+      }
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================================================
+   CONVERT RAW BASE64 TO DATA URL
+   ========================================================= */
+
+function normalizeImage(image){
+
+  if(!image){
+    return null;
+  }
+
+
+  if(
+    image.startsWith("data:image/")
+  ){
+    return image;
+  }
+
+
+  if(
+    image.startsWith("http://") ||
+    image.startsWith("https://") ||
+    image.startsWith("blob:")
+  ){
+
+    return image;
+
+  }
+
+
+  /* Raw base64 */
+
+  if(
+    image.length>200 &&
+    /^[A-Za-z0-9+/=]+$/.test(image)
+  ){
+
+    return "data:image/png;base64,"+image;
+
+  }
+
+
+  return image;
+
+}
+
+
+/* =========================================================
+   DOWNLOAD IMAGE
+   ========================================================= */
+
+async function downloadImage(imageUrl){
+
+  try{
+
+    const response=
+      await fetch(imageUrl);
+
+    if(!response.ok){
+      throw new Error("Could not download image.");
+    }
+
+
+    const blob=
+      await response.blob();
+
+
+    const blobUrl=
+      URL.createObjectURL(blob);
+
+
+    const link=
+      document.createElement("a");
+
+    link.href=blobUrl;
+
+    link.download=
+      "SARVESH-AI-image-" +
+      Date.now() +
+      ".png";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+
+    setTimeout(function(){
+
+      URL.revokeObjectURL(blobUrl);
+
+    },1000);
+
+
+  }catch(error){
+
+    /* Fallback for remote images */
+
+    try{
+
+      const link=
+        document.createElement("a");
+
+      link.href=imageUrl;
+
+      link.target="_blank";
+
+      link.rel="noopener";
+
+      link.download=
+        "SARVESH-AI-image.png";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+    }catch(e){
+
+      alert(
+        "Unable to download the image."
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD IMAGE TO MESSAGE
+   ========================================================= */
+
+function addImageToBubble(bubble,imageUrl){
+
+  const box=
+    document.createElement("div");
+
+  box.className=
+    "generatedImageBox";
+
+
+  const img=
+    document.createElement("img");
+
+  img.className=
+    "generatedImage";
+
+  img.alt=
+    "Generated by SARVESH AI";
+
+  img.loading="lazy";
+
+  img.src=
+    normalizeImage(imageUrl);
+
+
+  img.onerror=function(){
+
+    box.innerHTML="";
+
+    const error=
+      document.createElement("div");
+
+    error.className="imageError";
+
+    error.textContent=
+      "⚠️ The generated image could not be displayed.";
+
+    box.appendChild(error);
+
+  };
+
+
+  box.appendChild(img);
+
+
+  const actions=
+    document.createElement("div");
+
+  actions.className=
+    "imageActions";
+
+
+  const downloadBtn=
+    document.createElement("button");
+
+  downloadBtn.type="button";
+
+  downloadBtn.className=
+    "downloadImageBtn";
+
+  downloadBtn.innerHTML=
+    "⬇️ Download Image";
+
+
+  downloadBtn.addEventListener(
+    "click",
+    function(){
+
+      downloadImage(
+        normalizeImage(imageUrl)
+      );
+
+    }
+  );
+
+
+  actions.appendChild(downloadBtn);
+
+  box.appendChild(actions);
+
+  bubble.appendChild(box);
+
+}
+
+
+/* =========================================================
+   CLEAN IMAGE MARKDOWN FROM TEXT
+   ========================================================= */
+
+function cleanImageText(text){
+
+  if(typeof text!=="string"){
+    return text;
+  }
+
+
+  return text
+
+    .replace(
+      /![^]*\]([^)]+)/g,
+      ""
+    )
+
+    .trim();
 
 }
 
@@ -429,37 +1081,88 @@ function getTime(){
    ADD MESSAGE
    ========================================================= */
 
-function addMessage(role,text){
+function addMessage(role,text,imageUrl=null){
 
   if(welcome){
+
     welcome.style.display="none";
+
   }
 
-  const row = document.createElement("div");
 
-  row.className =
+  const row=
+    document.createElement("div");
+
+  row.className=
     "messageRow " +
-    (role === "user" ? "user" : "ai");
+    (role==="user" ? "user" : "ai");
 
-  const bubble = document.createElement("div");
 
-  bubble.className =
+  const bubble=
+    document.createElement("div");
+
+  bubble.className=
     "message " +
-    (role === "user" ? "user" : "ai");
+    (role==="user" ? "user" : "ai");
 
-  bubble.textContent = text;
 
-  const time = document.createElement("div");
+  /* Add text */
+
+  if(text){
+
+    const cleanText=
+      cleanImageText(text);
+
+
+    if(cleanText){
+
+      const textNode=
+        document.createElement("div");
+
+      textNode.textContent=
+        cleanText;
+
+      bubble.appendChild(textNode);
+
+    }
+
+  }
+
+
+  /* Add image */
+
+  if(imageUrl){
+
+    addImageToBubble(
+      bubble,
+      imageUrl
+    );
+
+  }
+
+
+  const time=
+    document.createElement("div");
 
   time.className="time";
-  time.textContent=getTime();
+
+  time.textContent=
+    getTime();
+
 
   bubble.appendChild(time);
+
   row.appendChild(bubble);
 
-  chat.insertBefore(row,typing);
 
-  chat.scrollTop=chat.scrollHeight;
+  chat.insertBefore(
+    row,
+    typing
+  );
+
+
+  chat.scrollTop=
+    chat.scrollHeight;
 
 }
 
@@ -472,7 +1175,8 @@ function showTyping(){
 
   typing.classList.add("show");
 
-  chat.scrollTop=chat.scrollHeight;
+  chat.scrollTop=
+    chat.scrollHeight;
 
 }
 
@@ -490,67 +1194,162 @@ function hideTyping(){
 
 async function sendMessage(){
 
-  const text=input.value.trim();
+  const text=
+    input.value.trim();
+
 
   if(!text || isSending){
     return;
   }
 
+
   isSending=true;
+
   sendBtn.disabled=true;
 
-  addMessage("user",text);
+
+  addMessage(
+    "user",
+    text
+  );
+
 
   conversation.push({
+
     role:"user",
+
     content:text
+
   });
 
+
   input.value="";
+
   input.style.height="auto";
+
 
   showTyping();
 
+
   try{
 
-    const history = conversation.slice(-12);
+    const history=
+      conversation.slice(-12);
 
-    const response = await fetch(WORKER_URL,{
 
-      method:"POST",
+    const response=
+      await fetch(
+        WORKER_URL,
+        {
 
-      headers:{
-        "Content-Type":"application/json"
-      },
+          method:"POST",
 
-      body:JSON.stringify({
-        message:text,
-        history:history
-      })
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
 
-    });
+          body:JSON.stringify({
+
+            message:text,
+
+            history:history
+
+          })
+
+        }
+      );
 
 
     let data;
 
+
     try{
-      data=await response.json();
+
+      data=
+        await response.json();
+
     }catch{
-      throw new Error("The server returned an invalid response.");
-    }
-
-
-    if(!response.ok){
 
       throw new Error(
-        data.error ||
-        "AI server error. Please try again."
+        "The server returned an invalid response."
       );
 
     }
 
 
-    if(!data.reply){
+    console.log(
+      "SARVESH AI response:",
+      data
+    );
+
+
+    if(!response.ok){
+
+      throw new Error(
+
+        data.error ||
+        "AI server error. Please try again."
+
+      );
+
+    }
+
+
+    /*
+       Find generated image BEFORE
+       checking for normal reply.
+    */
+
+    const imageUrl=
+      findImage(data);
+
+
+    /*
+       Get normal AI text.
+    */
+
+    let reply=
+      data.reply ||
+      data.message ||
+      "";
+
+
+    /*
+       If Worker returned OpenRouter-style
+       response directly.
+    */
+
+    if(
+      !reply &&
+      data.choices &&
+      data.choices[0] &&
+      data.choices[0].message
+    ){
+
+      const content=
+        data.choices[0].message.content;
+
+
+      if(typeof content==="string"){
+
+        reply=content;
+
+      }else{
+
+        reply="";
+
+      }
+
+    }
+
+
+    /*
+       If only an image was returned,
+       don't show an error.
+    */
+
+    if(!reply && !imageUrl){
 
       throw new Error(
         "SARVESH AI did not return a reply."
@@ -560,38 +1359,82 @@ async function sendMessage(){
 
 
     conversation.push({
+
       role:"assistant",
-      content:data.reply
+
+      content:
+        reply ||
+        "[Generated image]"
+
     });
+
 
     hideTyping();
 
-    addMessage("assistant",data.reply);
 
-    speak(data.reply);
+    /*
+       IMPORTANT:
+       Show image + text.
+    */
+
+    addMessage(
+      "assistant",
+      reply,
+      imageUrl
+    );
+
+
+    /*
+       Speak only normal text.
+    */
+
+    if(reply){
+
+      speak(
+        cleanImageText(reply)
+      );
+
+    }
+
 
   }catch(error){
 
     hideTyping();
 
-    console.error(error);
+    console.error(
+      "SARVESH AI error:",
+      error
+    );
 
-    let message =
+
+    let message=
       "Sorry, I couldn't connect to SARVESH AI right now.";
+
 
     if(
       error.message &&
-      error.message.length < 200
+      error.message.length<300
     ){
-      message += "\n\n" + error.message;
+
+      message +=
+        "\n\n" +
+        error.message;
+
     }
 
-    addMessage("assistant",message);
+
+    addMessage(
+      "assistant",
+      message
+    );
+
 
   }finally{
 
     isSending=false;
+
     sendBtn.disabled=false;
+
     input.focus();
 
   }
@@ -613,31 +1456,43 @@ sendBtn.addEventListener(
    ENTER TO SEND
    ========================================================= */
 
-input.addEventListener("keydown",function(e){
+input.addEventListener(
+  "keydown",
+  function(e){
 
-  if(e.key==="Enter" && !e.shiftKey){
+    if(
+      e.key==="Enter" &&
+      !e.shiftKey
+    ){
 
-    e.preventDefault();
+      e.preventDefault();
 
-    sendMessage();
+      sendMessage();
+
+    }
 
   }
-
-});
+);
 
 
 /* =========================================================
-   AUTO RESIZE TEXTAREA
+   AUTO RESIZE
    ========================================================= */
 
-input.addEventListener("input",function(){
+input.addEventListener(
+  "input",
+  function(){
 
-  this.style.height="auto";
+    this.style.height="auto";
 
-  this.style.height =
-    Math.min(this.scrollHeight,110) + "px";
+    this.style.height=
+      Math.min(
+        this.scrollHeight,
+        110
+      )+"px";
 
-});
+  }
+);
 
 
 /* =========================================================
@@ -646,26 +1501,44 @@ input.addEventListener("input",function(){
 
 function speak(text){
 
-  if(!("speechSynthesis" in window)){
+  if(
+    !text ||
+    !("speechSynthesis" in window)
+  ){
+
     return;
+
   }
+
 
   try{
 
     window.speechSynthesis.cancel();
 
-    const utterance =
-      new SpeechSynthesisUtterance(text);
+
+    const utterance=
+      new SpeechSynthesisUtterance(
+        text
+      );
+
 
     utterance.rate=1;
+
     utterance.pitch=1;
+
     utterance.volume=1;
 
-    window.speechSynthesis.speak(utterance);
+
+    window.speechSynthesis.speak(
+      utterance
+    );
+
 
   }catch(error){
 
-    console.log("Speech output unavailable");
+    console.log(
+      "Speech output unavailable"
+    );
 
   }
 
@@ -676,17 +1549,21 @@ function speak(text){
    VOICE INPUT
    ========================================================= */
 
-const SpeechRecognition =
+const SpeechRecognition=
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
 
+
 let recognition=null;
+
 let listening=false;
 
 
 if(SpeechRecognition){
 
-  recognition=new SpeechRecognition();
+  recognition=
+    new SpeechRecognition();
+
 
   recognition.lang="en-IN";
 
@@ -699,79 +1576,96 @@ if(SpeechRecognition){
 
     listening=true;
 
-    micBtn.classList.add("listening");
+    micBtn.classList.add(
+      "listening"
+    );
 
     micBtn.textContent="⏹";
 
   };
 
 
-  recognition.onresult=function(event){
+  recognition.onresult=
+    function(event){
 
-    const result =
-      event.results[0][0].transcript;
-
-    input.value=result;
-
-    input.dispatchEvent(
-      new Event("input")
-    );
-
-  };
+      const result=
+        event.results[0][0]
+          .transcript;
 
 
-  recognition.onerror=function(event){
+      input.value=result;
 
-    console.log(
-      "Speech recognition error:",
-      event.error
-    );
 
-  };
+      input.dispatchEvent(
+        new Event("input")
+      );
+
+    };
+
+
+  recognition.onerror=
+    function(event){
+
+      console.log(
+        "Speech recognition error:",
+        event.error
+      );
+
+    };
 
 
   recognition.onend=function(){
 
     listening=false;
 
-    micBtn.classList.remove("listening");
+    micBtn.classList.remove(
+      "listening"
+    );
 
     micBtn.textContent="🎤";
 
   };
 
 
-  micBtn.addEventListener("click",function(){
+  micBtn.addEventListener(
+    "click",
+    function(){
 
-    if(listening){
+      if(listening){
 
-      recognition.stop();
+        recognition.stop();
 
-      return;
+        return;
+
+      }
+
+
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        console.log(error);
+
+      }
 
     }
+  );
 
-    try{
-
-      recognition.start();
-
-    }catch(error){
-
-      console.log(error);
-
-    }
-
-  });
 
 }else{
 
-  micBtn.addEventListener("click",function(){
+  micBtn.addEventListener(
+    "click",
+    function(){
 
-    alert(
-      "Voice input is not supported by this browser."
-    );
+      alert(
+        "Voice input is not supported by this browser."
+      );
 
-  });
+    }
+  );
 
 }
 
@@ -782,34 +1676,48 @@ if(SpeechRecognition){
 
 try{
 
-  const saved =
-    localStorage.getItem("sarvesh_ai_chat");
+  const saved=
+    localStorage.getItem(
+      "sarvesh_ai_chat"
+    );
+
 
   if(saved){
 
-    conversation=JSON.parse(saved);
+    conversation=
+      JSON.parse(saved);
 
-    conversation.forEach(item=>{
 
-      if(
-        item.role==="user" ||
-        item.role==="assistant"
-      ){
+    conversation.forEach(
+      function(item){
 
-        addMessage(
-          item.role,
-          item.content
-        );
+        if(
+          item.role==="user" ||
+          item.role==="assistant"
+        ){
+
+          /*
+             Saved messages containing
+             only text are restored normally.
+          */
+
+          addMessage(
+            item.role,
+            item.content
+          );
+
+        }
 
       }
-
-    });
+    );
 
   }
 
 }catch(error){
 
-  console.log("No saved chat");
+  console.log(
+    "No saved chat"
+  );
 
 }
 
@@ -818,33 +1726,39 @@ try{
    SAVE CHAT
    ========================================================= */
 
-setInterval(function(){
+setInterval(
+  function(){
 
-  try{
+    try{
 
-    localStorage.setItem(
-      "sarvesh_ai_chat",
-      JSON.stringify(
-        conversation.slice(-30)
-      )
-    );
+      localStorage.setItem(
 
-  }catch(error){
+        "sarvesh_ai_chat",
 
-    console.log("Could not save chat");
+        JSON.stringify(
+          conversation.slice(-30)
+        )
 
-  }
+      );
 
-},2000);
+    }catch(error){
+
+      console.log(
+        "Could not save chat"
+      );
+
+    }
+
+  },
+  2000
+);
 
 
 /* =========================================================
-   FOCUS INPUT
+   FOCUS
    ========================================================= */
 
 input.focus();
 
-</script>
-
-</body>
+</script></body>
 </html>
